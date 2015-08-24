@@ -8,7 +8,8 @@
 /*    */ {
 /*  8 */   public static final BeanComparator INSTANCE = new BeanComparator();
 /*    */ 
-/*    */   public int compare(BeanInterface o1, BeanInterface o2) {
+/*    */   @Override
+public int compare(BeanInterface o1, BeanInterface o2) {
 /* 11 */     Number v1 = o1.getPriority();
 /* 12 */     Number v2 = o2.getPriority();
 /* 13 */     if (v1 == null)
@@ -24,7 +25,3 @@
 /*    */   }
 /*    */ }
 
-/* Location:           C:\Users\anli\Desktop\classes\
- * Qualified Name:     com.javapms.basic.comparator.BeanComparator
- * JD-Core Version:    0.6.1
- */
