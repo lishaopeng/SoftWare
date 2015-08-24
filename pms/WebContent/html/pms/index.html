@@ -1,0 +1,809 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>系统管理</title>
+<meta name="author" content="Andy"/>
+<meta name="copyright" content="Copyright &copy; 2015 - 2016 Andy  All Rights Reserved."/>
+<link rel="shortcut icon" href="/skin/pms/default/img/favicon.ico">
+<link href="/skin/pms/default/css/style.css" rel="stylesheet"/>
+<script src="/skin/comm/js/jquery-1.8.3.js"></script>
+<script src="/skin/pms/default/js/com.js"></script>
+<!--[if IE]><script src="/skin/pms/default/js/html5.js"></script><![endif]-->
+<script language="javascript">
+$(function() {
+	var oItem = document.getElementById('item');
+	var oSpan = oItem.getElementsByTagName('span')[0];
+	var oUl = oItem.getElementsByTagName('ul')[0];
+	var aLi =oUl.getElementsByTagName('li');
+	oItem.onmouseover=function(){
+		oUl.style.display = 'block';
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].index = i;
+			aLi[i].onmouseover=function(){
+				this.style.background = '#C8E1EA';
+				if(this.index!=aLi.length-1){
+					this.style.color ='#ff3300';
+				}
+			}
+			aLi[i].onmouseout=function(){
+				this.style.background = 'none';
+				this.style.color ='';
+			}
+			aLi[i].onclick=function(){
+				if(this.index!=aLi.length){
+					oSpan.innerHTML = this.innerHTML;
+					oUl.style.display = 'none';
+					var idstr = $(this).attr("id");
+					var id = idstr.substring(5);
+					$("#mId").val(id);
+				}
+			}
+		}
+	}
+	oItem.onmouseout=function(){
+		oUl.style.display = 'none';
+	}
+  
+  var scrtime;
+  $(".comList").hover(function(){
+	  clearInterval(scrtime);
+	 },function(){
+	  scrtime = setInterval(function(){
+	  var $ul = $(".comList");
+	  var liHeight = $ul.find("li:last").height();
+	  $ul.animate({marginTop : liHeight+20 +"px"},1000,function(){
+	  $ul.find("li:last").prependTo($ul);
+	  $ul.find("li:first").hide();
+	  $ul.css({marginTop:0});
+	  $ul.find("li:first").fadeIn(1000);
+	  }); 
+	 },3000);
+  }).trigger("mouseleave");
+})
+
+function checkval(){
+	if($("input[name='q']").val()=="请输入关键词"){
+		 alert("请输入关键词!");
+	   	 $("input[name='q']").focus();
+	   	 return false;
+	}
+	return true;
+}
+</script>
+</head>
+
+<body>
+<!--header-->
+<header>
+	<!--top-->
+<div id="loginhtml"></div>
+	<!--/top-->
+    
+    <!-- top_search -->
+	<section class="top-search-wrap s b">
+		<h1><a href="/">支行系统</a></h1>
+        <div class="top-search fr">
+			<div id="search">
+				<form action="/query.jsp" name="search" id="search" method="post" onsubmit="return checkval();">
+                    <div id="search">
+                        <div class="bar">
+                            <div class="item" id="item"> <span>新闻</span>
+                                <ul>
+                                    <li id="model2">新闻</li>
+                                    <li id="model3">图集</li>
+                                    <li id="model4">视频</li>
+                                    <li id="model5">专题</li>
+                                </ul>
+                            </div>
+                            <div class="sText"><input type="text" value="请输入关键词" onfocus="if(this.value=='请输入关键词')this.value=''" onblur="if(this.value=='')this.value='请输入关键词'" autocomplete="off" name="q"/></div>
+                        </div>
+                        <input type="hidden" name="mId" id="mId" value="2"/>
+                        <div class="sSubmit"><input type="submit" value=""/></div>
+                    </div>
+                </form>
+            </div>
+		</div>
+    </section>    <!-- /top_search -->
+
+	<!-- nav -->
+	<nav class="s b">
+                <ul>
+        	<li class="nb"><strong><a href="http://localhost:8080/news/index.html" title="新闻">新闻</a></strong>
+				<a href="http://localhost:8080/china/index.html" target="_blank" title="国内">国内</a>
+				<a href="http://localhost:8080/world/index.html" target="_blank" title="国际">国际</a>
+				<a href="http://localhost:8080/mil/index.html" target="_blank" title="军事">军事</a>
+				<a href="http://localhost:8080/photo/index.html" target="_blank" title="图片">图片</a>
+        	</li>
+        	<li><strong><a href="http://localhost:8080/sports/index.html" title="体育">体育</a></strong>
+				<a href="http://localhost:8080/nba/index.html" target="_blank" title="NBA">NBA</a>
+				<a href="http://localhost:8080/football/index.html" target="_blank" title="足球">足球</a>
+				<a href="http://localhost:8080/others/index.html" target="_blank" title="综合">综合</a>
+				<a href="http://localhost:8080/tennis/index.html" target="_blank" title="网球">网球</a>
+        	</li>
+        	<li><strong><a href="http://localhost:8080/ent/index.html" title="娱乐">娱乐</a></strong>
+				<a href="http://localhost:8080/film/index.html" target="_blank" title="电影">电影</a>
+				<a href="http://localhost:8080/tv/index.html" target="_blank" title="电视">电视</a>
+				<a href="http://localhost:8080/music/index.html" target="_blank" title="音乐">音乐</a>
+				<a href="http://localhost:8080/star/index.html" target="_blank" title="明星">明星</a>
+        	</li>
+        	<li><strong><a href="http://localhost:8080/finance/index.html" title="财经">财经</a></strong>
+				<a href="http://localhost:8080/stock/index.html" target="_blank" title="股票">股票</a>
+				<a href="http://localhost:8080/fund/index.html" target="_blank" title="基金">基金</a>
+				<a href="http://localhost:8080/forex/index.html" target="_blank" title="外汇">外汇</a>
+				<a href="http://localhost:8080/futuremarket/index.html" target="_blank" title="期货">期货</a>
+        	</li>
+        	<li><strong><a href="http://localhost:8080/house/index.html" title="房产">房产</a></strong>
+				<a href="http://localhost:8080/fcnews/index.html" target="_blank" title="快讯">快讯</a>
+				<a href="http://localhost:8080/home/index.html" target="_blank" title="家居">家居</a>
+				<a href="http://localhost:8080/fitments/index.html" target="_blank" title="装修">装修</a>
+				<a href="http://localhost:8080/fctz/index.html" target="_blank" title="投资">投资</a>
+        	</li>
+        	<li class="nb"><strong><a href="http://localhost:8080/tech/index.html" title="科技">科技</a></strong>
+				<a href="http://localhost:8080/internet/index.html" target="_blank" title="互联网">互联网</a>
+				<a href="http://localhost:8080/it/index.html" target="_blank" title="IT">IT</a>
+				<a href="http://localhost:8080/elec/index.html" target="_blank" title="家电">家电</a>
+				<a href="http://localhost:8080/discovery/index.html" target="_blank" title="探索">探索</a>
+        	</li>
+        	<li><strong><a href="http://localhost:8080/health/index.html" title="健康">健康</a></strong>
+				<a href="http://localhost:8080/healthcare/index.html" target="_blank" title="保健">保健</a>
+				<a href="http://localhost:8080/yangsheng/index.html" target="_blank" title="养生">养生</a>
+				<a href="http://localhost:8080/mingyi/index.html" target="_blank" title="名医">名医</a>
+				<a href="http://localhost:8080/medicine/index.html" target="_blank" title="药品">药品</a>
+        	</li>
+        	<li><strong><a href="http://localhost:8080/style/index.html" title="时尚">时尚</a></strong>
+				<a href="http://localhost:8080/clothes/index.html" target="_blank" title="服装">服装</a>
+				<a href="http://localhost:8080/shipin/index.html" target="_blank" title="饰品">饰品</a>
+				<a href="http://localhost:8080/car/index.html" target="_blank" title="名车">名车</a>
+				<a href="http://localhost:8080/foods/index.html" target="_blank" title="美食">美食</a>
+        	</li>
+        	<li><strong><a href="http://localhost:8080/travel/index.html" title="旅游">旅游</a></strong>
+				<a href="http://localhost:8080/youji/index.html" target="_blank" title="游记">游记</a>
+				<a href="http://localhost:8080/huwai/index.html" target="_blank" title="户外">户外</a>
+				<a href="http://localhost:8080/jingdian/index.html" target="_blank" title="景点">景点</a>
+				<a href="http://localhost:8080/techan/index.html" target="_blank" title="特产">特产</a>
+        	</li>
+            <li><strong><a href="#" title="互动">互动</a></strong>
+				<a href="/forum.jsp" target="_blank" title="论坛">论坛</a>
+				<a href="/messageboard.jsp" target="_blank" title="留言板">留言板</a>
+				<a href="/questionList.jsp" target="_blank" title="问卷调查">问卷调查</a>
+        	</li>
+        </ul>
+	</nav>    <!-- /nav -->
+</header>
+<!--/header--> 
+
+<!--ad_1-->
+<!-- 固定位置 -->
+<div class="ad-1">
+<a href="http://www.javapms.com" target="_blank" title="javapms正式发布">
+<img src="/member/upload/pms/201405/26005623vsyf.jpg" width="1000" height="121" alt="javapms正式发布"/>
+</a>
+</div>
+<!-- 漂浮广告 -->
+<!--ad_1-->
+
+<!--main_1-->
+<section class="s mt5 b">
+	<div class="ml">
+        <!--jdt-->
+        <div class="focus-pic" id="focus-pic">
+            <div data-scro="list" log-type="toppic">
+                <ul>
+                    <li class="item" style="left:0;">
+                        <a href="http://localhost:8080/football/187.html" target="_blank" title="恒大总分3-3首夺亚冠 创中国足球历史"><img src="/member/upload/pms/201405/25124300ipxi.jpg" alt="恒大总分3-3首夺亚冠 创中国足球历史'/]"/></a>
+                        <h3><a href="http://localhost:8080/football/187.html" target="_blank">恒大总分3-3首夺亚冠 创中国足球&hellip;</a></h3>
+                        <div></div>
+                    </li>
+                    <li class="item">
+                        <a href="http://localhost:8080/others/123.html" target="_blank" title="贝克汉姆退役后计划曝光 重回大联盟升任老板"><img src="/member/upload/pms/201405/2512435356mu.jpg" alt="贝克汉姆退役后计划曝光 重回大联盟升任老板'/]"/></a>
+                        <h3><a href="http://localhost:8080/others/123.html" target="_blank">贝克汉姆退役后计划曝光 重回大&hellip;</a></h3>
+                        <div></div>
+                    </li>
+                    <li class="item">
+                        <a href="http://localhost:8080/clothes/3.html" target="_blank" title="小风衣大作为 雨天穿出好心情"><img src="/member/upload/pms/201405/25124430hwo6.jpg" alt="小风衣大作为 雨天穿出好心情'/]"/></a>
+                        <h3><a href="http://localhost:8080/clothes/3.html" target="_blank">小风衣大作为 雨天穿出好心情</a></h3>
+                        <div></div>
+                    </li>
+                </ul>
+            </div>
+          
+            <div class="controler" data-scro="controler">
+            <b class="down">1</b><b>2</b><b>3</b></div>
+            <div class="controler2" data-scro="controler2"><a href="javascript:;" class="prev"><i></i></a><a href="javascript:;" class="next"><i></i></a></div>  
+        </div>
+		<script src="/skin/pms/default/js/focus.js"></script>
+        <!--/jdt-->
+        <div class="bor1 mt10">
+    		<div class="tit1"><h2>最新热评</h2></div>
+            <div class="h_comList mt5 mb5">
+                <ul class="w96 comList">
+                <li onmouseover="this.style.background='#E6EFFD';" onmouseout="this.style.background='#F2F6FD';">
+                  <dl>
+                    <dt><a href="#" class="user">admin</a><a href="/comment-193.jsp" target="_blank" class='ico'></a>评论<a title="百度“百发不中”犯了哪三个错误？" href="http://localhost:8080/internet/193.html" target="_blank" class="blue">#百度“百发不中”犯了哪三个错误？#</a> </dt>
+                    <dd class="pic">
+                    <img src="/member/upload/pms/201405/25124618cjtl.png"/></dd>
+                    <dd>百度加油</dd>
+                  </dl>
+                </li>
+                <li onmouseover="this.style.background='#E6EFFD';" onmouseout="this.style.background='#F2F6FD';">
+                  <dl>
+                    <dt><a href="#" class="user">JAVAPMS网友</a><a href="/comment-193.jsp" target="_blank" class='ico'></a>评论<a title="百度“百发不中”犯了哪三个错误？" href="http://localhost:8080/internet/193.html" target="_blank" class="blue">#百度“百发不中”犯了哪三个错误？#</a> </dt>
+                    <dd class="pic">
+                    <img src="/skin/pms/default/img/face.png"/></dd>
+                    <dd>互联网经融不好做了</dd>
+                  </dl>
+                </li>
+                <li onmouseover="this.style.background='#E6EFFD';" onmouseout="this.style.background='#F2F6FD';">
+                  <dl>
+                    <dt><a href="#" class="user">JAVAPMS网友</a><a href="/comment-196.jsp" target="_blank" class='ico'></a>评论<a title="韩国小姐不打扮像易容" href="http://localhost:8080/clothes/196.html" target="_blank" class="blue">#韩国小姐不打扮像易容#</a> </dt>
+                    <dd class="pic">
+                    <img src="/skin/pms/default/img/face.png"/></dd>
+                    <dd>都一个模子里刻出来的，流水线工程</dd>
+                  </dl>
+                </li>
+                <li onmouseover="this.style.background='#E6EFFD';" onmouseout="this.style.background='#F2F6FD';">
+                  <dl>
+                    <dt><a href="#" class="user">JAVAPMS网友</a><a href="/comment-194.jsp" target="_blank" class='ico'></a>评论<a title="苹果第四财季净利75亿美元 同比下滑9%" href="http://localhost:8080/it/194.html" target="_blank" class="blue">#苹果第四财季净利75亿美元 同比下滑9%#</a> </dt>
+                    <dd class="pic">
+                    <img src="/skin/pms/default/img/face.png"/></dd>
+                    <dd>叫美国偷窥监视他国，都不买了，赞成的顶起</dd>
+                  </dl>
+                </li>
+                <li onmouseover="this.style.background='#E6EFFD';" onmouseout="this.style.background='#F2F6FD';">
+                  <dl>
+                    <dt><a href="#" class="user">test</a><a href="/comment-211.jsp" target="_blank" class='ico'></a>评论<a title="中国首次演练多型战机高速公路起降" href="http://localhost:8080/photo/211.html" target="_blank" class="blue">#中国首次演练多型战机高速公路起降#</a> </dt>
+                    <dd class="pic">
+                    <img src="/member/upload/pms/201405/26180116f9ii.png"/></dd>
+                    <dd>这样飞机跑道就多了</dd>
+                  </dl>
+                </li>
+                <li onmouseover="this.style.background='#E6EFFD';" onmouseout="this.style.background='#F2F6FD';">
+                  <dl>
+                    <dt><a href="#" class="user">test</a><a href="/comment-212.jsp" target="_blank" class='ico'></a>评论<a title="新疆打掉23个涉恐团伙抓200人 缴200余爆炸装置" href="http://localhost:8080/china/212.html" target="_blank" class="blue">#新疆打掉23个涉恐团伙抓200人 缴200余爆&hellip;#</a> </dt>
+                    <dd class="pic">
+                    <img src="/member/upload/pms/201405/26180116f9ii.png"/></dd>
+                    <dd>对恐怖分子，抓住后不奢望他变成好人，而是让他变成死人</dd>
+                  </dl>
+                </li>
+                <li onmouseover="this.style.background='#E6EFFD';" onmouseout="this.style.background='#F2F6FD';">
+                  <dl>
+                    <dt><a href="#" class="user">test</a><a href="/comment-212.jsp" target="_blank" class='ico'></a>评论<a title="新疆打掉23个涉恐团伙抓200人 缴200余爆炸装置" href="http://localhost:8080/china/212.html" target="_blank" class="blue">#新疆打掉23个涉恐团伙抓200人 缴200余爆&hellip;#</a> </dt>
+                    <dd class="pic">
+                    <img src="/member/upload/pms/201405/26180116f9ii.png"/></dd>
+                    <dd>没有人性的犯罪分子</dd>
+                  </dl>
+                </li>
+                <li onmouseover="this.style.background='#E6EFFD';" onmouseout="this.style.background='#F2F6FD';">
+                  <dl>
+                    <dt><a href="#" class="user">test</a><a href="/comment-212.jsp" target="_blank" class='ico'></a>评论<a title="新疆打掉23个涉恐团伙抓200人 缴200余爆炸装置" href="http://localhost:8080/china/212.html" target="_blank" class="blue">#新疆打掉23个涉恐团伙抓200人 缴200余爆&hellip;#</a> </dt>
+                    <dd class="pic">
+                    <img src="/member/upload/pms/201405/26180116f9ii.png"/></dd>
+                    <dd>坚决反对恐怖行为</dd>
+                  </dl>
+                </li>
+                <li onmouseover="this.style.background='#E6EFFD';" onmouseout="this.style.background='#F2F6FD';">
+                  <dl>
+                    <dt><a href="#" class="user">test</a><a href="/comment-212.jsp" target="_blank" class='ico'></a>评论<a title="新疆打掉23个涉恐团伙抓200人 缴200余爆炸装置" href="http://localhost:8080/china/212.html" target="_blank" class="blue">#新疆打掉23个涉恐团伙抓200人 缴200余爆&hellip;#</a> </dt>
+                    <dd class="pic">
+                    <img src="/member/upload/pms/201405/26180116f9ii.png"/></dd>
+                    <dd>对恐怖分子，就是要严厉打击，维护国家统一，人民生活稳定。</dd>
+                  </dl>
+                </li>
+                <li onmouseover="this.style.background='#E6EFFD';" onmouseout="this.style.background='#F2F6FD';">
+                  <dl>
+                    <dt><a href="#" class="user">admin</a><a href="/comment-111.jsp" target="_blank" class='ico'></a>评论<a title="重庆“女子纤夫”再现川江船工风采" href="http://localhost:8080/photo/111.html" target="_blank" class="blue">#重庆“女子纤夫”再现川江船工风采#</a> </dt>
+                    <dd class="pic">
+                    <img src="/member/upload/pms/201405/25124618cjtl.png"/></dd>
+                    <dd>在体育馆里面装模作样的，作秀呐，有本事到江里拉真船啊</dd>
+                  </dl>
+                </li>
+                </ul>
+            </div>
+        </div>
+	</div>
+	<div class="mc">
+    	<div class="tit2"><h2>最新要闻</h2></div>
+		<div class="tt w96">
+			<h2><a href="http://localhost:8080/china/53.html" title="一睹为快全世界排名前十位富豪的房子" target="_blank">一睹为快全世界排名前十位富豪的房子</a></h2>
+            <p>
+            [<a href="http://localhost:8080/shipin/76.html" title="黄金引疯抢 盘点那些吸睛纯金单品" target="_blank">黄金引疯抢 盘点那些吸睛纯&hellip;</a>]            [<a href="http://localhost:8080/youji/62.html" title="五一欧洲游提高防范意识 少带现金别露富" target="_blank">五一欧洲游提高防范意识 少&hellip;</a>]
+            </p>
+		</div>
+        <ul class="nlist w96">
+            <li><a href="http://localhost:8080/china/212.html" title="新疆打掉23个涉恐团伙抓200人 缴200余爆炸装置" target="_blank">新疆打掉23个涉恐团伙抓200人 缴200余爆炸装置</a></li>
+            
+            <li><a href="http://localhost:8080/photo/211.html" title="中国首次演练多型战机高速公路起降" target="_blank">中国首次演练多型战机高速公路起降</a></li>
+            
+            <li><a href="http://localhost:8080/jingdian/198.html" title="永定土楼，光阴里的闽地“围”生活" target="_blank">永定土楼，光阴里的闽地“围”生活</a></li>
+            
+            <li><a href="http://localhost:8080/jingdian/197.html" title="圣安德鲁斯：重游威廉与凯特邂逅之地" target="_blank">圣安德鲁斯：重游威廉与凯特邂逅之地</a></li>
+            
+            <li><a href="http://localhost:8080/clothes/196.html" title="韩国小姐不打扮像易容" target="_blank">韩国小姐不打扮像易容</a></li>
+            
+            <li><a href="http://localhost:8080/clothes/195.html" title="爸爸去哪儿热播 李湘女儿飙升为最热萌娃" target="_blank">爸爸去哪儿热播 李湘女儿飙升为最热萌娃</a></li>
+            <li class="bb2"></li>
+            <li><a href="http://localhost:8080/it/194.html" title="苹果第四财季净利75亿美元 同比下滑9%" target="_blank">苹果第四财季净利75亿美元 同比下滑9%</a></li>
+            
+            <li><a href="http://localhost:8080/internet/193.html" title="百度“百发不中”犯了哪三个错误？" target="_blank">百度“百发不中”犯了哪三个错误？</a></li>
+            
+            <li><a href="http://localhost:8080/stock/192.html" title="四因素决定结构性牛市仍未结束 冬种机会孕育" target="_blank">四因素决定结构性牛市仍未结束 冬种机会孕育</a></li>
+            
+            <li><a href="http://localhost:8080/fund/191.html" title="基金半年报披露完毕 上半年大赚成长股 " target="_blank">基金半年报披露完毕 上半年大赚成长股 </a></li>
+            
+            <li><a href="http://localhost:8080/tv/190.html" title="崔永元美国传话：不回应辞职" target="_blank">崔永元美国传话：不回应辞职</a></li>
+            
+            <li><a href="http://localhost:8080/nba/189.html" title="霍华德：誓为火箭拿总冠军 与哈登堪比OK组合" target="_blank">霍华德：誓为火箭拿总冠军 与哈登堪比OK组合</a></li>
+            <li class="bb2"></li>
+            <li><a href="http://localhost:8080/football/188.html" title="埃神：恒大需要愿续约 加盟前曾想去巴萨皇马" target="_blank">埃神：恒大需要愿续约 加盟前曾想去巴萨皇马</a></li>
+            
+            <li><a href="http://localhost:8080/football/187.html" title="恒大总分3-3首夺亚冠 创中国足球历史" target="_blank">恒大总分3-3首夺亚冠 创中国足球历史</a></li>
+            
+            <li><a href="http://localhost:8080/china/185.html" title="日猜测如中日开战 中国将渡海进攻冲绳台湾" target="_blank">日猜测如中日开战 中国将渡海进攻冲绳台湾</a></li>
+            
+            <li><a href="http://localhost:8080/fcnews/210.html" title="“孙家拳”新解" target="_blank">“孙家拳”新解</a></li>
+            
+            <li><a href="http://localhost:8080/fcnews/209.html" title="中国建筑前九月销售额超千亿 净利增25.7%" target="_blank">中国建筑前九月销售额超千亿 净利增25.7%</a></li>
+            
+            <li><a href="http://localhost:8080/fitments/208.html" title="装修攻略 教你装修最省钱的方法" target="_blank">装修攻略 教你装修最省钱的方法</a></li>
+            
+		</ul>
+	</div>
+	<div class="mr">
+    	<a href="http://www.javapms.com/help/index.jsp" target="_blank" title="javapms系统说明专题讲解"><img src="/skin/pms/default/img/topic.jpg" alt="javapms系统说明专题讲解"/></a>
+        <a href="/questionList.jsp" target="_blank" title="javapms问卷调查"><img src="/skin/pms/default/img/wjdc.jpg" alt="javapms问卷调查" class="mt5"/></a>
+  		<div class="bor mt10">
+            <div class="tit"><h2>视频快讯</h2><em><a href="http://localhost:8080/videos/index.html" target="_blank">更多 &raquo;</a></em></div>
+            <div class="cont">
+            <div class="twlist w92 mt5 pb5">
+              <a href="http://localhost:8080/videos/82.html" title="处处碰壁 菲律宾“特使”狼狈离台" target="_blank" class="video"><img src="/member/upload/pms/201405/251247445jnb.jpg"/><i></i></a>
+              <div class="in_text">
+                <h2><a href="http://localhost:8080/videos/82.html" title="处处碰壁 菲律宾“特使”狼狈离台" target="_blank">处处碰壁 菲律宾“特使”狼狈离台</a></h2>
+                <p>据台湾“中央社”报道，台湾&hellip;<a href="http://localhost:8080/videos/82.html" target="_blank" class="blue">[详情]</a></p>
+              </div>
+            </div>
+            <ul class="nlist2 w92 pb5">
+                <li class="m4"><a href="http://localhost:8080/futuremarket/108.html" title="黄金涨跌之谜 财经郎眼" target="_blank">黄金涨跌之谜 财经郎眼</a></li>
+                <li class="m4"><a href="http://localhost:8080/videos/88.html" title="视频体验最经典的简欧风情家居空间设计" target="_blank">视频体验最经典的简欧风情家居空&hellip;</a></li>
+                <li class="m4"><a href="http://localhost:8080/videos/86.html" title="我国中西部多省份网友目击不明飞行物" target="_blank">我国中西部多省份网友目击不明飞&hellip;</a></li>
+                <li class="m4"><a href="http://localhost:8080/videos/85.html" title="实拍醉酒女子当街大闹 警车上跳热舞" target="_blank">实拍醉酒女子当街大闹 警车上跳热舞</a></li>
+            </ul>
+            </div>
+        </div>
+        <div class="bor mt10">
+            <div class="tit"><h2>热点排行</h2></div>
+            <div class="cont">
+                <ol class="ph2 w92">
+                    <li><a href="http://localhost:8080/china/71.html" title="中国首部旅游法将实施 “门票经济”将有法可依" target="_blank">中国首部旅游法将实施 “门票经济”将有&hellip;</a></li>
+                    <li><a href="http://localhost:8080/china/68.html" title="400多白衣天使成住房公积金“黑户”" target="_blank">400多白衣天使成住房公积金“黑户”</a></li>
+                    <li><a href="http://localhost:8080/china/73.html" title="住房公积金“猫鼠博弈” 已成地方政府“小金库”" target="_blank">住房公积金“猫鼠博弈” 已成地方政府“&hellip;</a></li>
+                    <li><a href="http://localhost:8080/photo/110.html" title="沈阳浑南新区一小型飞机坠毁 3人受伤" target="_blank">沈阳浑南新区一小型飞机坠毁 3人受伤</a></li>
+                    <li><a href="http://localhost:8080/photo/116.html" title="玛莎拉蒂车主车展砸车维权 称其有眼无珠" target="_blank">玛莎拉蒂车主车展砸车维权 称其有眼无珠</a></li>
+                    <li><a href="http://localhost:8080/photo/111.html" title="重庆“女子纤夫”再现川江船工风采" target="_blank">重庆“女子纤夫”再现川江船工风采</a></li>
+                </ol>
+            </div>
+		</div> 		          
+    </div>
+</section>
+<!--/main_1-->
+
+<!--ad_2-->
+<section class="s mt10">
+	<a href="http://www.javapms.com" target="_blank" title="javapms建站套餐"><img width="1000" src="/skin/pms/default/img/ad.jpg" alt="javapms建站套餐"/></a>
+</section>
+<!--/ad_2-->
+
+<!--main_2-->
+<section class="s b mt10">
+	<div class="ml">
+		<div class="bor1">
+			<div class="tit1"><h2><a href="http://localhost:8080/sports/index.html" target="_blank">体育</a></h2></div>
+            <div class="cont">
+				<div class="twlist2 mt10 mb5 w94">
+					<a href="http://localhost:8080/nba/189.html" title="霍华德：誓为火箭拿总冠军 与哈登堪比OK组合" target="_blank"><img src="/member/upload/pms/201405/25125108ww40.jpg" alt="霍华德：誓为火箭拿总冠军 与哈登堪比OK组合"/></a>
+					<div class="in_text">
+						<h2><a href="http://localhost:8080/nba/189.html" title="霍华德：誓为火箭拿总冠军 与哈登堪比OK组合" target="_blank">霍华德：誓为火箭拿总冠军 与哈登堪比OK组合</a></h2>
+						<p>北京时间10月28日，《休斯敦纪事报》消息，霍华德在今天对着球迷们保证，要为他&hellip;<a href="http://localhost:8080/nba/189.html" target="_blank" class="red">[详情]</a></p>
+					</div>
+				</div>
+				<div class="twlist2 mt10 mb5 w94">
+					<a href="http://localhost:8080/football/188.html" title="埃神：恒大需要愿续约 加盟前曾想去巴萨皇马" target="_blank"><img src="/member/upload/pms/201405/25125155ezv9.jpg" alt="埃神：恒大需要愿续约 加盟前曾想去巴萨皇马"/></a>
+					<div class="in_text">
+						<h2><a href="http://localhost:8080/football/188.html" title="埃神：恒大需要愿续约 加盟前曾想去巴萨皇马" target="_blank">埃神：恒大需要愿续约 加盟前曾想去巴萨皇马</a></h2>
+						<p>记者白国华首尔报道 “如果有可能的话，我希望回到主场，在广州再进一球。”赛&hellip;<a href="http://localhost:8080/football/188.html" target="_blank" class="red">[详情]</a></p>
+					</div>
+				</div>
+				<ul class="nlist2 w94 pb5">
+					<li><a href="http://localhost:8080/football/187.html" title="恒大总分3-3首夺亚冠 创中国足球历史" target="_blank">恒大总分3-3首夺亚冠 创中国足球历史</a></li>
+					<li><a href="http://localhost:8080/f1/125.html" title="F1西班牙站战术回放：阿隆索四停夺冠超预期" target="_blank">F1西班牙站战术回放：阿隆索四停夺冠超预期</a></li>
+					<li><a href="http://localhost:8080/tennis/124.html" title="李娜调侃球迷回应质疑：大家现在都已成专家" target="_blank">李娜调侃球迷回应质疑：大家现在都已成专家</a></li>
+					<li><a href="http://localhost:8080/others/123.html" title="贝克汉姆退役后计划曝光 重回大联盟升任老板" target="_blank">贝克汉姆退役后计划曝光 重回大联盟升任老板</a></li>
+					<li><a href="http://localhost:8080/football/122.html" title="西甲-巴萨2-1庆夺冠 法尔考破门梅西纪录终结" target="_blank">西甲-巴萨2-1庆夺冠 法尔考破门梅西纪录终结</a></li>
+				</ul>
+            </div>
+		</div>
+    </div>
+	<div class="mc">    	
+    	<div class="tit2"><h2><a href="http://localhost:8080/news/index.html" target="_blank">新闻</a></h2></div>
+		<div class="tt w96">
+			<h2><a href="http://localhost:8080/china/53.html" title="一睹为快全世界排名前十位富豪的房子" target="_blank">一睹为快全世界排名前十位富豪的房子</a></h2>
+            <p>
+            [<a href="http://localhost:8080/china/49.html" title="游客抵制凤凰古城涨价 五一古城客房预订降半" target="_blank">游客抵制凤凰古城涨价 五一&hellip;</a>]            [<a href="http://localhost:8080/china/38.html" title="沪铁路局春游40天送客4126万人 创历史新高" target="_blank">沪铁路局春游40天送客4126万&hellip;</a>]
+            </p>
+		</div>
+        <ul class="nlist w96">
+            <li><a href="http://localhost:8080/photo/211.html" title="中国首次演练多型战机高速公路起降" target="_blank">中国首次演练多型战机高速公路起降</a></li>
+            
+            <li><a href="http://localhost:8080/videos/82.html" title="处处碰壁 菲律宾“特使”狼狈离台" target="_blank">处处碰壁 菲律宾“特使”狼狈离台</a></li>
+            
+            <li><a href="http://localhost:8080/china/53.html" title="一睹为快全世界排名前十位富豪的房子" target="_blank">一睹为快全世界排名前十位富豪的房子</a></li>
+            
+            <li><a href="http://localhost:8080/china/212.html" title="新疆打掉23个涉恐团伙抓200人 缴200余爆炸装置" target="_blank">新疆打掉23个涉恐团伙抓200人 缴200余爆炸装置</a></li>
+            
+            <li><a href="http://localhost:8080/china/185.html" title="日猜测如中日开战 中国将渡海进攻冲绳台湾" target="_blank">日猜测如中日开战 中国将渡海进攻冲绳台湾</a></li>
+            <li class="bb2"></li>
+            <li><a href="http://localhost:8080/photo/116.html" title="玛莎拉蒂车主车展砸车维权 称其有眼无珠" target="_blank">玛莎拉蒂车主车展砸车维权 称其有眼无珠</a></li>
+            
+            <li><a href="http://localhost:8080/photo/115.html" title="十种食物吃多会丢命" target="_blank">十种食物吃多会丢命</a></li>
+            
+            <li><a href="http://localhost:8080/photo/110.html" title="沈阳浑南新区一小型飞机坠毁 3人受伤" target="_blank">沈阳浑南新区一小型飞机坠毁 3人受伤</a></li>
+            
+            <li><a href="http://localhost:8080/photo/113.html" title="南航新疆招空乘 千余美女角逐80岗位" target="_blank">南航新疆招空乘 千余美女角逐80岗位</a></li>
+            
+            <li><a href="http://localhost:8080/photo/111.html" title="重庆“女子纤夫”再现川江船工风采" target="_blank">重庆“女子纤夫”再现川江船工风采</a></li>
+            
+		</ul>
+    </div>
+	<div class="mr">
+        <div class="bor">
+    		<div class="tit"><h2><a href="http://localhost:8080/ent/index.html" target="_blank">娱乐</a></h2></div>
+            <div class="cont">
+				<div class="twlist mt10 mb5 w92">
+					<a href="http://localhost:8080/tv/190.html" title="崔永元美国传话：不回应辞职" target="_blank"><img src="/member/upload/pms/201405/251254510546.jpg"/></a>
+					<div class="in_text">
+						<h2><a href="http://localhost:8080/tv/190.html" title="崔永元美国传话：不回应辞职" target="_blank">崔永元美国传话：不回应辞职</a></h2>
+						<p>记者联系到身在美国的崔永元&hellip;<a href="http://localhost:8080/tv/190.html" target="_blank" class="red">[详情]</a></p>
+					</div>
+				</div>
+				<ul class="nlist2 w92 pb5">
+					<li><a href="http://localhost:8080/music/94.html" title="容祖儿新歌再被指抄袭 类似前科大起底" target="_blank">容祖儿新歌再被指抄袭 类似前科&hellip;</a></li>
+					<li><a href="http://localhost:8080/tv/92.html" title="陆贞”赵丽颖被曝坐台整容 回应:无聊" target="_blank">陆贞”赵丽颖被曝坐台整容 回应:&hellip;</a></li>
+					<li><a href="http://localhost:8080/tv/91.html" title="网传抗日传奇剧被限播 卫视称未收到通知" target="_blank">网传抗日传奇剧被限播 卫视称未&hellip;</a></li>
+					<li><a href="http://localhost:8080/film/90.html" title="大影节《1942》最佳 黄渤颜丙燕称帝后" target="_blank">大影节《1942》最佳 黄渤颜丙燕&hellip;</a></li>
+				</ul>
+            </div>
+        </div>
+        <div class="bor mt10">
+    		<div class="tit"><h2>精彩推荐</h2></div>
+            <div class="cont">
+            <ul class="nlist2 w92 pb5">
+                <li><a href="http://localhost:8080/football/187.html" title="恒大总分3-3首夺亚冠 创中国足球历史" target="_blank">恒大总分3-3首夺亚冠 创中国足球&hellip;</a></li>
+                <li><a href="http://localhost:8080/others/123.html" title="贝克汉姆退役后计划曝光 重回大联盟升任老板" target="_blank">贝克汉姆退役后计划曝光 重回大&hellip;</a></li>
+                <li><a href="http://localhost:8080/forex/104.html" title="美元指数强势触及84关口 欧美传声筒今竞相亮相 " target="_blank">美元指数强势触及84关口 欧美传&hellip;</a></li>
+                <li><a href="http://localhost:8080/internet/95.html" title="谷歌开发者大会开幕：地图成为最大亮点" target="_blank">谷歌开发者大会开幕：地图成为最&hellip;</a></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/main_2-->
+
+<!--ad_3-->
+<section class="s mt10">
+	<a href="http://www.javapms.com" target="_blank" title="javapms建站套餐"><img width="1000" src="/skin/pms/default/img/ad.jpg" alt="javapms建站套餐"/></a>
+</section>
+<!--/ad_3-->
+
+<!--main_3-->
+<section class="s b mt10">
+	<div class="ml">
+    	<div class="bor1">
+    		<div class="tit1"><h2><a href="http://localhost:8080/finance/index.html" target="_blank">财经</a></h2></div>
+			<div class="twlist2 mt10 mb5 w94">
+				<a href="http://localhost:8080/stock/192.html" title="四因素决定结构性牛市仍未结束 冬种机会孕育" target="_blank"><img src="/member/upload/pms/201405/251256232iym.jpg" alt="四因素决定结构性牛市仍未结束 冬种机会孕育"/></a>
+				<div class="in_text">
+					<h2><a href="http://localhost:8080/stock/192.html" title="四因素决定结构性牛市仍未结束 冬种机会孕育" target="_blank">四因素决定结构性牛市仍未结束 冬种机会孕育</a></h2>
+					<p>近期股指持续大跌4个交易日，不是秋收行情的结束，而是部分个股风险的集中释放&hellip;<a href="http://localhost:8080/stock/192.html" target="_blank" class="red">[详情]</a></p>
+				</div>
+			</div>
+			<div class="twlist2 mt10 mb5 w94">
+				<a href="http://localhost:8080/fund/191.html" title="基金半年报披露完毕 上半年大赚成长股 " target="_blank"><img src="/member/upload/pms/201405/25125645bijq.jpg" alt="基金半年报披露完毕 上半年大赚成长股 "/></a>
+				<div class="in_text">
+					<h2><a href="http://localhost:8080/fund/191.html" title="基金半年报披露完毕 上半年大赚成长股 " target="_blank">基金半年报披露完毕 上半年大赚成长股 </a></h2>
+					<p>上半年基金盈利205.38亿元，较去年同期近千亿的盈利水平相差甚远。其中，押注成&hellip;<a href="http://localhost:8080/fund/191.html" target="_blank" class="red">[详情]</a></p>
+				</div>
+			</div>
+			<ul class="nlist2 w94 pb5">
+				<li><a href="http://localhost:8080/futuremarket/108.html" title="黄金涨跌之谜 财经郎眼" target="_blank">黄金涨跌之谜 财经郎眼</a></li>
+				<li><a href="http://localhost:8080/futuremarket/107.html" title="大商所加紧胶合板纤维板期货上市准备工作" target="_blank">大商所加紧胶合板纤维板期货上市准备工作</a></li>
+				<li><a href="http://localhost:8080/fund/106.html" title="部分基金经理周一抄底上海家化被套 被迫参加股东大会" target="_blank">部分基金经理周一抄底上海家化被套 被迫参加&hellip;</a></li>
+				<li><a href="http://localhost:8080/fund/105.html" title="杠杆基金双盈B及创业板ETF今年涨幅超40%" target="_blank">杠杆基金双盈B及创业板ETF今年涨幅超40%</a></li>
+				<li><a href="http://localhost:8080/forex/104.html" title="美元指数强势触及84关口 欧美传声筒今竞相亮相 " target="_blank">美元指数强势触及84关口 欧美传声筒今竞相亮相 </a></li>
+			</ul>
+		</div>
+    </div>
+	<div class="mc">    	
+    	<div class="tit2"><h2><a href="http://localhost:8080/tech/index.html" target="_blank">科技</a></h2></div>
+		<div class="w96 mt10 mb5 b">
+			<div class="twlist3">
+            	<a href="http://localhost:8080/it/194.html" title="苹果第四财季净利75亿美元 同比下滑9%" target="_blank"><img src="/member/upload/pms/201405/25130022s8wx.png" alt="苹果第四财季净利75亿美元 同比下滑9%"/></a>
+            	<p class="titlebg"></p>
+            	<p class="title"><a href="http://localhost:8080/it/194.html" title="苹果第四财季净利75亿美元 同比下滑9%" target="_blank">苹果第四财季净利75亿美元 同比下滑9%</a></p>
+			</div>
+			<div class="twlist3">
+            	<a href="http://localhost:8080/internet/193.html" title="百度“百发不中”犯了哪三个错误？" target="_blank"><img src="/member/upload/pms/201405/25130037f00m.png" alt="百度“百发不中”犯了哪三个错误？"/></a>
+            	<p class="titlebg"></p>
+            	<p class="title"><a href="http://localhost:8080/internet/193.html" title="百度“百发不中”犯了哪三个错误？" target="_blank">百度“百发不中”犯了哪三个错误？</a></p>
+			</div>
+		</div>
+        <ul class="nlist w96">
+        	<li class="bb2"></li>
+            <li><a href="http://localhost:8080/it/194.html" title="苹果第四财季净利75亿美元 同比下滑9%" target="_blank">苹果第四财季净利75亿美元 同比下滑9%</a></li>
+            <li><a href="http://localhost:8080/internet/193.html" title="百度“百发不中”犯了哪三个错误？" target="_blank">百度“百发不中”犯了哪三个错误？</a></li>
+            <li><a href="http://localhost:8080/internet/100.html" title="英研制先进无人四旋翼直升机 可自动追踪拍摄" target="_blank">英研制先进无人四旋翼直升机 可自动追踪拍摄</a></li>
+            <li><a href="http://localhost:8080/internet/99.html" title="联合国提倡多吃昆虫缓解粮荒：解决蛋白质短缺" target="_blank">联合国提倡多吃昆虫缓解粮荒：解决蛋白质短缺</a></li>
+            <li><a href="http://localhost:8080/internet/98.html" title="金山称WPS月活跃用户年底有望过亿" target="_blank">金山称WPS月活跃用户年底有望过亿</a></li>
+            <li><a href="http://localhost:8080/internet/97.html" title="富士康开辟新客户乏力：苹果公司另结新欢" target="_blank">富士康开辟新客户乏力：苹果公司另结新欢</a></li>
+            <li><a href="http://localhost:8080/internet/96.html" title="华为中兴否认在欧盟从事不公平贸易" target="_blank">华为中兴否认在欧盟从事不公平贸易</a></li>
+		</ul>
+    </div>
+	<div class="mr">
+        <div class="bor">
+    		<div class="tit"><h2>健康</h2></div>
+            <div class="cont">
+				<div class="twlist mt10 mb5 w92">
+					<a href="http://localhost:8080/yangsheng/7.html" title="H7N9来袭 关爱家人的5款美食疗方" target="_blank"><img src="/member/upload/pms/201405/25130318i780.jpg"/></a>
+					<div class="in_text">
+						<h2><a href="http://localhost:8080/yangsheng/7.html" title="H7N9来袭 关爱家人的5款美食疗方" target="_blank">H7N9来袭 关爱家人的5款美食疗方</a></h2>
+						<p>关爱家人从一点一滴做起，保&hellip;<a href="http://localhost:8080/yangsheng/7.html" target="_blank" class="red">[详情]</a></p>
+					</div>
+				</div>
+				<ul class="nlist2 w92 mt10 pb5">
+					<li><a href="http://localhost:8080/yangsheng/78.html" title="柠檬水十大健康功效" target="_blank">柠檬水十大健康功效</a></li>
+					<li><a href="http://localhost:8080/yangsheng/77.html" title="感冒嗓子疼喝杯柠檬蜂蜜水" target="_blank">感冒嗓子疼喝杯柠檬蜂蜜水</a></li>
+					<li><a href="http://localhost:8080/yangsheng/57.html" title="“炒”菜工程的N个诀窍 如何防止肉类水分流失" target="_blank">“炒”菜工程的N个诀窍 如何防止&hellip;</a></li>
+					<li><a href="http://localhost:8080/healthcare/56.html" title="肚子胀气爱放屁惹尴尬 盘点容易引起胀气的食物" target="_blank">肚子胀气爱放屁惹尴尬 盘点容易&hellip;</a></li>
+					<li><a href="http://localhost:8080/yangsheng/47.html" title="千万别空腹喝的八种饮品" target="_blank">千万别空腹喝的八种饮品</a></li>
+					<li><a href="http://localhost:8080/healthcare/46.html" title="您未必知道的柠檬水十大健康功效" target="_blank">您未必知道的柠檬水十大健康功效</a></li>
+					<li><a href="http://localhost:8080/healthcare/37.html" title="不得不知 日常生活中的解毒物质" target="_blank">不得不知 日常生活中的解毒物质</a></li>
+					<li><a href="http://localhost:8080/healthcare/33.html" title="吃冻豆腐能减肥？教你冻豆腐的五种简易做法" target="_blank">吃冻豆腐能减肥？教你冻豆腐的五&hellip;</a></li>
+					<li><a href="http://localhost:8080/yangsheng/32.html" title="养生专家谈春季的衣食住行" target="_blank">养生专家谈春季的衣食住行</a></li>
+					<li><a href="http://localhost:8080/health/17.html" title="混搭女王范儿 性感秒杀装" target="_blank">混搭女王范儿 性感秒杀装</a></li>
+				</ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/main_3-->
+
+<!--ad_4-->
+<section class="s mt10">
+	<a href="http://www.javapms.com" target="_blank" title="javapms建站套餐"><img width="1000" src="/skin/pms/default/img/ad.jpg" alt="javapms建站套餐"/></a>
+</section>
+<!--/ad_4-->
+
+<!--main_4-->
+<section class="s b mt10">
+	<div class="ml">
+    	<div class="bor1">
+    		<div class="tit1"><h2><a href="http://localhost:8080/style/index.html" target="_blank">时尚</a></h2></div>
+			<div class="twlist2 mt10 mb5 w94">
+				<a href="http://localhost:8080/clothes/196.html" title="韩国小姐不打扮像易容" target="_blank"><img src="/member/upload/pms/201405/251304200elq.jpg" alt="韩国小姐不打扮像易容"/></a>
+				<div class="in_text">
+					<h2><a href="http://localhost:8080/clothes/196.html" title="韩国小姐不打扮像易容" target="_blank">韩国小姐不打扮像易容</a></h2>
+					<p>每年“韩国小姐”选拔大赛拉开帷幕都好像酝酿着一场魔术。<a href="http://localhost:8080/clothes/196.html" target="_blank" class="red">[详情]</a></p>
+				</div>
+			</div>
+			<div class="twlist2 mt10 mb5 w94">
+				<a href="http://localhost:8080/clothes/195.html" title="爸爸去哪儿热播 李湘女儿飙升为最热萌娃" target="_blank"><img src="/member/upload/pms/201405/251304360oua.jpg" alt="爸爸去哪儿热播 李湘女儿飙升为最热萌娃"/></a>
+				<div class="in_text">
+					<h2><a href="http://localhost:8080/clothes/195.html" title="爸爸去哪儿热播 李湘女儿飙升为最热萌娃" target="_blank">爸爸去哪儿热播 李湘女儿飙升为最热萌娃</a></h2>
+					<p>最近，随着爸爸去哪儿的热播，李湘女儿瞬间飙升为最热萌娃。<a href="http://localhost:8080/clothes/195.html" target="_blank" class="red">[详情]</a></p>
+				</div>
+			</div>
+			<ul class="nlist2 w94 pb5">
+				<li><a href="http://localhost:8080/shipin/76.html" title="黄金引疯抢 盘点那些吸睛纯金单品" target="_blank">黄金引疯抢 盘点那些吸睛纯金单品</a></li>
+				<li><a href="http://localhost:8080/shipin/75.html" title="周大福黄金首饰频曝生锈 珠宝并无鉴定证书" target="_blank">周大福黄金首饰频曝生锈 珠宝并无鉴定证书</a></li>
+				<li><a href="http://localhost:8080/foods/51.html" title="营养丰富的西红柿炖牛肉家常做法" target="_blank">营养丰富的西红柿炖牛肉家常做法</a></li>
+				<li><a href="http://localhost:8080/foods/35.html" title="如何鉴别优质五花肉 教你3种五花肉简易做法" target="_blank">如何鉴别优质五花肉 教你3种五花肉简易做法</a></li>
+				<li><a href="http://localhost:8080/clothes/29.html" title="从树皮衣看衣料的发展过程" target="_blank">从树皮衣看衣料的发展过程</a></li>
+			</ul>
+		</div>
+    </div>
+	<div class="mc">    	
+    	<div class="tit2"><h2><a href="http://localhost:8080/travel/index.html" target="_blank">旅游</a></h2></div>
+		<div class="w96 mt10 mb5 b">
+			<div class="twlist3">
+            	<a href="http://localhost:8080/jingdian/198.html" title="永定土楼，光阴里的闽地“围”生活" target="_blank"><img src="/member/upload/pms/201405/25130532ocsp.jpg" alt="永定土楼，光阴里的闽地“围”生活"/></a>
+            	<p class="titlebg"></p>
+            	<p class="title"><a href="http://localhost:8080/jingdian/198.html" title="永定土楼，光阴里的闽地“围”生活" target="_blank">永定土楼，光阴里的闽地“围”生活</a></p>
+			</div>
+			<div class="twlist3">
+            	<a href="http://localhost:8080/jingdian/197.html" title="圣安德鲁斯：重游威廉与凯特邂逅之地" target="_blank"><img src="/member/upload/pms/201405/25130546hrbu.jpg" alt="圣安德鲁斯：重游威廉与凯特邂逅之地"/></a>
+            	<p class="titlebg"></p>
+            	<p class="title"><a href="http://localhost:8080/jingdian/197.html" title="圣安德鲁斯：重游威廉与凯特邂逅之地" target="_blank">圣安德鲁斯：重游威廉与凯特邂逅之地</a></p>
+			</div>
+		</div>
+        <ul class="nlist w96">
+        	<li class="bb2"></li>
+            <li><a href="http://localhost:8080/jingdian/198.html" title="永定土楼，光阴里的闽地“围”生活" target="_blank">永定土楼，光阴里的闽地“围”生活</a></li>
+            <li><a href="http://localhost:8080/jingdian/197.html" title="圣安德鲁斯：重游威廉与凯特邂逅之地" target="_blank">圣安德鲁斯：重游威廉与凯特邂逅之地</a></li>
+            <li><a href="http://localhost:8080/youji/87.html" title="以背包客的名义 去东北感受清凉一夏" target="_blank">以背包客的名义 去东北感受清凉一夏</a></li>
+            <li><a href="http://localhost:8080/youji/72.html" title="消协：注意选择正规旅行社 出游注意留证据" target="_blank">消协：注意选择正规旅行社 出游注意留证据</a></li>
+            <li><a href="http://localhost:8080/youji/62.html" title="五一欧洲游提高防范意识 少带现金别露富" target="_blank">五一欧洲游提高防范意识 少带现金别露富</a></li>
+            <li><a href="http://localhost:8080/youji/55.html" title="“五一”机票已经升温，一些短期旅游线尤其热门" target="_blank">“五一”机票已经升温，一些短期旅游线尤其热门</a></li>
+            <li><a href="http://localhost:8080/youji/54.html" title="“五一”假期热门航线返程机票吃紧" target="_blank">“五一”假期热门航线返程机票吃紧</a></li>
+		</ul>
+    </div>
+	<div class="mr">
+        <div class="bor">
+    		<div class="tit"><h2><a href="http://localhost:8080/house/index.html" target="_blank">房产</a></h2></div>
+            <div class="cont">
+				<div class="twlist mt10 mb5 w92">
+					<a href="http://localhost:8080/fcnews/210.html" title="“孙家拳”新解" target="_blank"><img src="/member/upload/pms/201405/25130615q7f0.jpg"/></a>
+					<div class="in_text">
+						<h2><a href="http://localhost:8080/fcnews/210.html" title="“孙家拳”新解" target="_blank">“孙家拳”新解</a></h2>
+						<p>此刻的融创正处在甜蜜点。就&hellip;<a href="http://localhost:8080/fcnews/210.html" target="_blank" class="red">[详情]</a></p>
+					</div>
+				</div>
+				<ul class="nlist2 w92 mt10 pb5">
+					<li><a href="http://localhost:8080/fcnews/209.html" title="中国建筑前九月销售额超千亿 净利增25.7%" target="_blank">中国建筑前九月销售额超千亿 净&hellip;</a></li>
+					<li><a href="http://localhost:8080/fitments/208.html" title="装修攻略 教你装修最省钱的方法" target="_blank">装修攻略 教你装修最省钱的方法</a></li>
+					<li><a href="http://localhost:8080/fcnews/207.html" title="北京最牛违建仍矗立 房主称月底拆完" target="_blank">北京最牛违建仍矗立 房主称月底拆完</a></li>
+					<li><a href="http://localhost:8080/fcnews/206.html" title="张文利：百利机电进一步深化国企改革" target="_blank">张文利：百利机电进一步深化国企&hellip;</a></li>
+					<li><a href="http://localhost:8080/fcnews/204.html" title="金九银十北京楼市躁动 新建商品住宅持续火爆" target="_blank">金九银十北京楼市躁动 新建商品&hellip;</a></li>
+					<li><a href="http://localhost:8080/fcnews/205.html" title="金九银十北京楼市躁动 新建商品住宅持续火爆" target="_blank">金九银十北京楼市躁动 新建商品&hellip;</a></li>
+					<li><a href="http://localhost:8080/fcnews/203.html" title="北京新地王诞生 融创楼面价7.3万夺农展馆地块" target="_blank">北京新地王诞生 融创楼面价7.3万&hellip;</a></li>
+					<li><a href="http://localhost:8080/fcnews/202.html" title="恒大强势进京 40亿入驻豆各庄限房价地块" target="_blank">恒大强势进京 40亿入驻豆各庄限&hellip;</a></li>
+					<li><a href="http://localhost:8080/fcnews/201.html" title="王健林谈生意、局势与财富观" target="_blank">王健林谈生意、局势与财富观</a></li>
+					<li><a href="http://localhost:8080/fcnews/200.html" title="北上广深房价飙升 加剧决策层对房价泡沫的担忧" target="_blank">北上广深房价飙升 加剧决策层对&hellip;</a></li>
+				</ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/main_4-->
+
+<!--main_4-->
+<section class="s mt10 bor1 b">
+	<div class="tit1"><h2>精彩图集</h2></div>
+    <div class="cont">
+      <div class="mt5 w98 b">
+    	<div class="cl">
+          <div class="flashshow"><a href="http://localhost:8080/photo/211.html" title="中国首次演练多型战机高速公路起降" target="_blank"><img src="/member/upload/pms/201405/25151127lm0n.jpg" alt="中国首次演练多型战机高速公路起降"/></a>
+            <p class="flashtext"></p>
+            <p class="flash_tit"><a href="http://localhost:8080/photo/211.html" title="中国首次演练多型战机高速公路起降" target="_blank">中国首次演练多型战机高速公路起降</a></p>
+          </div>
+        </div>
+        <div class="cm b">
+          <div class="flashshow"><a href="http://localhost:8080/photo/116.html" title="玛莎拉蒂车主车展砸车维权 称其有眼无珠" target="_blank"><img src="/member/portal/demo/201305/18001030kdj2.jpg" alt="玛莎拉蒂车主车展砸车维权 称其有眼无珠" width="285" height="165" /></a>
+            <p class="flashtext"></p>
+            <p class="flash_tit"><a href="http://localhost:8080/photo/116.html" title="玛莎拉蒂车主车展砸车维权 称其有眼无珠" target="_blank">玛莎拉蒂车主车展砸车维权 称其有眼无珠</a></p>
+          </div>
+          <div class="flashshow"><a href="http://localhost:8080/photo/115.html" title="十种食物吃多会丢命" target="_blank"><img src="/member/upload/pms/201405/25131602jii2.jpg" alt="十种食物吃多会丢命" width="180" height="165" /></a>
+            <p class="flashtext"></p>
+            <p class="flash_tit"><a href="http://localhost:8080/photo/115.html" title="十种食物吃多会丢命" target="_blank">十种食物吃多会丢命</a></p>
+          </div>
+          <div class="flashshow"><a href="http://localhost:8080/photo/110.html" title="沈阳浑南新区一小型飞机坠毁 3人受伤" target="_blank"><img src="/member/portal/demo/201305/17170626g0u1.jpg" alt="沈阳浑南新区一小型飞机坠毁 3人受伤" width="180" height="165" /></a>
+            <p class="flashtext"></p>
+            <p class="flash_tit"><a href="http://localhost:8080/photo/110.html" title="沈阳浑南新区一小型飞机坠毁 3人受伤" target="_blank">沈阳浑南新区一小型飞机坠毁 3人受伤</a></p>
+          </div>
+          <div class="flashshow"><a href="http://localhost:8080/photo/113.html" title="南航新疆招空乘 千余美女角逐80岗位" target="_blank"><img src="/member/upload/pms/201405/25150413x7as.jpg" alt="南航新疆招空乘 千余美女角逐80岗位" width="180" height="165" /></a>
+            <p class="flashtext"></p>
+            <p class="flash_tit"><a href="http://localhost:8080/photo/113.html" title="南航新疆招空乘 千余美女角逐80岗位" target="_blank">南航新疆招空乘 千余美女角逐80岗位</a></p>
+          </div>
+          <div class="flashshow"><a href="http://localhost:8080/photo/111.html" title="重庆“女子纤夫”再现川江船工风采" target="_blank"><img src="/member/portal/demo/201305/17183622clfb.jpg" alt="重庆“女子纤夫”再现川江船工风采" width="285" height="165" /></a>
+            <p class="flashtext"></p>
+            <p class="flash_tit"><a href="http://localhost:8080/photo/111.html" title="重庆“女子纤夫”再现川江船工风采" target="_blank">重庆“女子纤夫”再现川江船工风采</a></p>
+          </div>
+          <div class="flashshow"><a href="http://localhost:8080/photo/114.html" title="韩国女子团体明星美貌排行揭晓" target="_blank"><img src="/member/portal/demo/201305/172358552gq5.jpg" alt="韩国女子团体明星美貌排行揭晓" width="180" height="165" /></a>
+            <p class="flashtext"></p>
+            <p class="flash_tit"><a href="http://localhost:8080/photo/114.html" title="韩国女子团体明星美貌排行揭晓" target="_blank">韩国女子团体明星美貌排行揭晓</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+<!--/main_4-->
+
+<!--flink-->
+<div class="s flink mt10 bor1">
+	<div class="tit1"><h2>友情链接</h2></div>
+    <div class="fcont w98 mt10 mb5">
+    	        <a href="http://www.javapms.com" title="JAVAPMS官网" target="_blank">JAVAPMS官网</a>|
+        <a href="http://www.jmenhu.com" title="百姓生活网" target="_blank">百姓生活网</a>
+    </div>
+</div><!--flink-->
+
+<!--footer--> 
+<footer class="s mt5">
+<a href="http://www.javapms.com">关于我们</a> | <a href="http://www.javapms.com/download/index.jsp">服务条款</a> | <a href="http://www.javapms.com">开放平台</a> | <a href="http://www.javapms.com">广告服务</a> | <a href="http://www.javapms.com">人才招聘</a> | <a href="http://www.javapms.com">客服中心</a> | <a href="/guide/index.jsp">网站导航</a><br/>
+ICP备案号：赣ICP备11006121号-1 &nbsp; Copyright &copy; 2013 - 2014 <a href="http://www.javapms.com" target="_blank">www.javapms.com All Rights Reserved </a>
+<script type="text/javascript">
+  document.write(unescape("%3Cscript src='/visitViews.jsp%3Furl%3D")+document.location.href+unescape("' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</footer>
+<script language="javascript">
+$(function() {
+	$.get("/jslogin.jsp",{},function(data){
+		$("#loginhtml").html(data);
+	},"html");
+})
+</script><!--/footer-->
+
+<!--duilian-->
+<!-- 固定位置 -->
+<div id="leftDiv" style="position:absolute;top:60px;left:2%">
+  <div><a href="http://www.javapms.com" target="_blank" title="热烈庆祝javapms V1.3正式版发布"><img src="/member/upload/pms/201405/24093347wscd.jpg" alt="热烈庆祝javapms V1.3正式版发布"/></a></div>
+  <span style="font-size:12px;color:red;cursor:pointer;" onclick="close_duilian()">关闭×</span>
+</div>
+<div id="rightDiv" style="position:absolute;top:60px;right:2%;">
+  <div><a href="http://www.javapms.com" target="_blank" title="热烈庆祝javapms V1.3正式版发布"><img src="/member/upload/pms/201405/24093347wscd.jpg" alt="热烈庆祝javapms V1.3正式版发布"/></a></div>
+  <span style="font-size:12px;color:red;cursor:pointer;text-align:right;" onclick="close_duilian()">关闭×</span>
+</div>
+<script type="text/javascript">
+<!-- 
+lastScrollY = 0;
+function heartBeat(){ 
+var diffY;
+if (document.documentElement && document.documentElement.scrollTop)
+ diffY = document.documentElement.scrollTop;
+else if (document.body)
+ diffY = document.body.scrollTop
+else
+    {/*Netscape stuff*/}
+ 
+percent=.1*(diffY-lastScrollY); 
+if(percent>0)percent=Math.ceil(percent); 
+else percent=Math.floor(percent); 
+document.getElementById("leftDiv").style.top = parseInt(document.getElementById("leftDiv").style.top)+percent+"px";
+document.getElementById("rightDiv").style.top = parseInt(document.getElementById("leftDiv").style.top)+percent+"px";
+lastScrollY=lastScrollY+percent; 
+}
+
+//下面这段删除后，对联将不跟随屏幕而移动。
+window.setInterval("heartBeat()",20);
+function close_duilian(){
+  var l=document.getElementById("leftDiv");
+  var r=document.getElementById("rightDiv");
+   l.style.display="none";
+   r.style.display="none";
+}
+//-->
+</script>
+<!--/duilian-->
+<!--piaofu-->
+<!-- 固定位置 -->
+<div id="pfad" class="ad-5" style="position:absolute">
+<a href="http://www.javapms.com/idc/index.jsp" title="首页漂浮广告" target="_blank"><img src="/member/upload/pms/201405/241129323b0s.jpg" width="197" height="111" alt="首页漂浮广告"/></a>
+<div onClick="hidead();" style="font-size:12px;cursor:pointer;" align="right">关闭×</div>
+</div>
+<script>
+var x = 50,y = 60
+var xin = true, yin = true
+var step = 1
+var delay = 30
+var obj=document.getElementById("pfad")
+function floatAD() {
+var L=T=0
+var R= document.body.clientWidth-obj.offsetWidth
+var B = document.body.clientHeight-obj.offsetHeight
+obj.style.left = x + document.body.scrollLeft
+obj.style.top = y + document.body.scrollTop
+x = x + step*(xin?1:-1)
+if (x < L) { xin = true; x = L}
+if (x > R){ xin = false; x = R}
+y = y + step*(yin?1:-1)
+if (y < T) { yin = true; y = T }
+if (y > B) { yin = false; y = B }
+}
+var itl= setInterval("floatAD()", delay)
+obj.onmouseover=function(){clearInterval(itl)}
+obj.onmouseout=function(){itl=setInterval("floatAD()", delay)}
+function hidead()
+{document.getElementById("pfad").style.display="none";}
+</script>
+<!-- 弹窗广告 -->
+<!--/piaofu-->
+</body>
+</html>

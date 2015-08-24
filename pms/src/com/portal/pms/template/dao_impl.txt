@@ -1,0 +1,17 @@
+package #{dao_impl_p};
+
+import org.hibernate.Criteria;
+import org.springframework.stereotype.Repository;
+
+import com.javapms.basic.hibernate4.QueryDaoImpl;
+import #{dao_p}.#{Entity}Dao;
+import #{entity_p}.#{Entity};
+
+@Repository
+public class #{Entity}DaoImpl extends QueryDaoImpl<#{Entity}, Integer> implements #{Entity}Dao {
+	
+	@Override
+	protected Class<#{Entity}> getEntityClass() {
+		return #{Entity}.class;
+	}
+}
