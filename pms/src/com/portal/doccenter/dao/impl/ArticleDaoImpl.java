@@ -319,7 +319,7 @@ public int delDocBySite(Integer siteId) {
 /* 317 */           crit.add(Restrictions.like("c.number", number + "%"));
 /*     */       }
 /* 319 */       else if (callLevel == 2) {
-/* 320 */         crit.createAlias("channels", "c");
+				/* 320 */crit.createAlias("channel", "c");
 /* 321 */         crit.add(Restrictions.eq("c.id", channelIds[0]));
 /*     */       } else {
 /* 323 */         appendChannelIds(crit, channelIds);

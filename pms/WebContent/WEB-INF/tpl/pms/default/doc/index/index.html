@@ -95,52 +95,48 @@ function checkval(){
 <!--main_1-->
 <section class="s mt5 b">
 	<div class="ml">
+	    <div class="tit1"><h2>[@Channel id='3']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
         <!--jdt-->
-		[@DocList tId='3' count='5' recommend='1']
+		[@DocList tId='2' count='10' cId='3' recommend='1' callLevel=2]
         <div class="focus-pic" id="focus-pic">
             <div data-scro="list" log-type="toppic">
                 <ul>
                     [#list list as a]
+                    [#if a_index <=5]
                     <li class="item"[#if a_index == 0] style="left:0;"[/#if]>
-                        <a href="${a.url}" target="_blank" title="${a.title!}"><img src="${base}${a.getPicStyle('3')!}" alt="${a.title!}'/]"/></a>
+                        <a href="${a.url}" target="_blank"><img src="${base}${a.getPicStyle('0')!}" alt="${a.title!}"/></a>
                         <h3><a href="${a.url}" target="_blank">[@StrLimit s=a.title l='16' r='<br/>'/]</a></h3>
                         <div></div>
                     </li>
+                    [/#if]>
                     [/#list]
                 </ul>
             </div>
           
             <div class="controler" data-scro="controler">
-            [#list list as b]<b[#if b_index == 0] class="down"[/#if]>${b_index+1}</b>[/#list]</div>
+            [#list list as b]
+            [#if b_index <=5 ]
+            <b[#if b_index == 0] class="down"[/#if]>${b_index+1}</b>
+            [/#if]
+            [/#list]
+            </div>
             <div class="controler2" data-scro="controler2"><a href="javascript:;" class="prev"><i></i></a><a href="javascript:;" class="next"><i></i></a></div>  
         </div>
 		<script src="/${skin}/js/focus.js"></script>
+		[/@DocList]
+		[@DocList count='4' cId='3' callLevel='2']
+		<ul class="nlist w96">
+         	<li class="bb2"></li>
+         	[#list list as c]
+            	<li><a href="${c.url}" title="${c.title!}" target="_blank">[@StrLimit s=c.title l='22'/]</a></li>
+            [/#list]
+		</ul>
         [/@DocList]
-        <!--/jdt-->
-        <div class="bor1 mt10">
-    		<div class="tit1"><h2>最新热评</h2></div>
-            <div class="h_comList mt5 mb5">
-                [@Comment count='10' checked='1']
-                <ul class="w96 comList">
-                [#list page.content as c]
-                <li onmouseover="this.style.background='#E6EFFD';" onmouseout="this.style.background='#F2F6FD';">
-                  <dl>
-                    <dt><a href="#" class="user">${(c.user.username)!"JAVAPMS网友"}</a><a href="${base}/comment-${c.doc.id!}.jsp" target="_blank" class='ico'></a>评论<a title="${c.doc.title}" href="${c.doc.url}" target="_blank" class="blue">#[@StrLimit s=c.doc.title l='20'/]#</a> </dt>
-                    <dd class="pic">
-                    <img [#if c.user??&&c.user.member??&&c.user.member.avatar??]src="${base}${c.user.member.avatar!}"[#else]src="/${skin}/img/face.png"[/#if]/></dd>
-                    <dd>[@StrLimit s=c.content?html l='40'/]</dd>
-                  </dl>
-                </li>
-                [/#list]
-                </ul>
-                [/@Comment]
-            </div>
-        </div>
 	</div>
 	<div class="mc">
-    	<div class="tit2"><h2>最新要闻</h2></div>
+    	<div class="tit2"><h2>[@Channel id='1']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
 		<div class="tt w96">
-			[@DocList tId='4' count='3' orderBy='2']
+			[@DocList count='3' cId='1' callLevel='2']
 			[#if list?size gt 0]
         	[#assign a=list[0]]
 			<h2><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='20'/]</a></h2>
@@ -152,44 +148,22 @@ function checkval(){
             [/#if]
 			[/@DocList]
 		</div>
-        [@DocList count='18']
+        [@DocList cId='1' count='13']
         <ul class="nlist w96">
 			[#list list as a]
+			[#if a_index gt 2]
             <li><a href="${a.url}" title="${a.title!}" target="_blank">[@StrLimit s=a.title l='22'/]</a></li>
-            [#if a_has_next && (a_index+1)%6 = 0]<li class="bb2"></li>[/#if]
+            [#if a_has_next && (a_index+4)%6 = 0]<li class="bb2"></li>[/#if]
+            [/#if]
             [/#list]
 		</ul>
 		[/@DocList]
 	</div>
 	<div class="mr">
-  		<div class="bor mt10">
-            <div class="tit"><h2>视频快讯</h2><em>[@Channel id='48']<a href="${bean.url}" target="_blank">[/@Channel]更多 &raquo;</a></em></div>
-            <div class="cont">
-            [@DocList mId='4' count='5' orderBy='2' callLevel='1']
-            [#if list?size gt 0]
-            [#assign a=list[0]]
-            <div class="twlist w92 mt5 pb5">
-              <a href="${a.url}" title="${a.title}" target="_blank" class="video"><img src="${base}${a.getPicStyle('0')!}"/><i></i></a>
-              <div class="in_text">
-                <h2><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='20'/]</a></h2>
-                <p>[@StrLimit s=a.description l='14'/]<a href="${a.url}" target="_blank" class="blue">[详情]</a></p>
-              </div>
-            </div>
-            <ul class="nlist2 w92 pb5">
-            [#list list as a]
-            [#if a_index gt 0]
-                <li class="m4"><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='16'/]</a></li>
-            [/#if]
-            [/#list]
-            </ul>
-            [/#if]
-            [/@DocList]
-            </div>
-        </div>
-        <div class="bor mt10">
+	    <div class="bor">
             <div class="tit"><h2>热点排行</h2></div>
             <div class="cont">
-                [@DocList count='6' orderBy='4']
+                [@DocList count='12' orderBy='4']
                 <ol class="ph2 w92">
                 [#list list as a]
                     <li><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='20'/]</a></li>
@@ -197,113 +171,18 @@ function checkval(){
                 </ol>
                 [/@DocList]
             </div>
-		</div> 		          
+		</div> 
     </div>
 </section>
 <!--/main_1-->
-
-
-<!--main_2-->
-<section class="s b mt10">
-	<div class="ml">
-		<div class="bor1">
-			<div class="tit1"><h2>[@Channel id='2']<a href="${bean.url}" target="_blank">[/@Channel]体育</a></h2></div>
-            <div class="cont">
-				[@DocList cId='2' tId='2' count='2' orderBy='2' callLevel='1']
-				[#list list as a]
-				<div class="twlist2 mt10 mb5 w94">
-					<a href="${a.url}" title="${a.title}" target="_blank"><img src="${base}${a.getPicStyle('0')!site.defImg}" alt="${a.title}"/></a>
-					<div class="in_text">
-						<h2><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='22'/]</a></h2>
-						<p>[@StrLimit s=a.description l='38'/]<a href="${a.url}" target="_blank" class="red">[详情]</a></p>
-					</div>
-				</div>
-				[/#list]
-				[/@DocList]
-				[@DocList cId='2' count='7' orderBy='2' callLevel='1']
-				<ul class="nlist2 w94 pb5">
-					[#list list as a]
-					[#if a_index gt 1]
-					<li><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='22'/]</a></li>
-					[/#if]
-					[/#list]
-				</ul>
-				[/@DocList]
-            </div>
-		</div>
-    </div>
-	<div class="mc">    	
-    	<div class="tit2"><h2>[@Channel id='1']<a href="${bean.url}" target="_blank">[/@Channel]新闻</a></h2></div>
-		<div class="tt w96">
-			[@DocList cId='1' tId='4' count='3' orderBy='2' callLevel='1']
-			[#if list?size gt 0]
-        	[#assign a=list[0]]
-			<h2><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='20'/]</a></h2>
-            <p>
-            [#list list as a]
-        	[#if a_index gt 0]
-            [<a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='14'/]</a>][/#if][/#list]
-            </p>
-            [/#if]
-			[/@DocList]
-		</div>
-        [@DocList cId='1' count='10' orderBy='2' callLevel='1']
-        <ul class="nlist w96">
-			[#list list as a]
-            <li><a href="${a.url}" title="${a.title!}" target="_blank">[@StrLimit s=a.title l='22'/]</a></li>
-            [#if a_has_next && (a_index+1)%5 = 0]<li class="bb2"></li>[/#if]
-            [/#list]
-		</ul>
-		[/@DocList]
-    </div>
-	<div class="mr">
-        <div class="bor">
-    		<div class="tit"><h2>[@Channel id='3']<a href="${bean.url}" target="_blank">[/@Channel]娱乐</a></h2></div>
-            <div class="cont">
-                [@DocList cId='3' count='5' orderBy='2' callLevel='1']
-				[#if list?size gt 0]
-				[#assign a=list[0]]
-				<div class="twlist mt10 mb5 w92">
-					<a href="${a.url}" title="${a.title}" target="_blank"><img src="${base}${a.getPicStyle('0')!site.defImg}"/></a>
-					<div class="in_text">
-						<h2><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='16'/]</a></h2>
-						<p>[@StrLimit s=a.description l='14'/]<a href="${a.url}" target="_blank" class="red">[详情]</a></p>
-					</div>
-				</div>
-				<ul class="nlist2 w92 pb5">
-					[#list list as a]
-					[#if a_index gt 0]
-					<li><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='16'/]</a></li>
-					[/#if]
-					[/#list]
-				</ul>
-				[/#if]
-				[/@DocList]
-            </div>
-        </div>
-        <div class="bor mt10">
-    		<div class="tit"><h2>精彩推荐</h2></div>
-            <div class="cont">
-            [@DocList count='4' recommend='1']
-            <ul class="nlist2 w92 pb5">
-            [#list list as a]
-                <li><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='16'/]</a></li>
-            [/#list]
-            </ul>
-            [/@DocList]
-            </div>
-        </div>
-    </div>
-</section>
-<!--/main_2-->
 
 
 <!--main_3-->
 <section class="s b mt10">
 	<div class="ml">
     	<div class="bor1">
-    		<div class="tit1"><h2>[@Channel id='4']<a href="${bean.url}" target="_blank">[/@Channel]财经</a></h2></div>
-			[@DocList cId='4' tId='2' count='2' orderBy='2' callLevel='1']
+    		<div class="tit1"><h2>[@Channel id='13']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
+			[@DocList cId='13' tId='2' count='2' orderBy='2' callLevel='1']
 			[#list list as a]
 			<div class="twlist2 mt10 mb5 w94">
 				<a href="${a.url}" title="${a.title}" target="_blank"><img src="${base}${a.getPicStyle('0')!site.defImg}" alt="${a.title}"/></a>
@@ -314,7 +193,7 @@ function checkval(){
 			</div>
 			[/#list]
 			[/@DocList]
-			[@DocList cId='4' count='7' orderBy='2' callLevel='1']
+			[@DocList cId='13' count='7' orderBy='2' callLevel='1']
 			<ul class="nlist2 w94 pb5">
 				[#list list as a]
 				[#if a_index gt 1]
@@ -326,9 +205,9 @@ function checkval(){
 		</div>
     </div>
 	<div class="mc">    	
-    	<div class="tit2"><h2>[@Channel id='13']<a href="${bean.url}" target="_blank">[/@Channel]科技</a></h2></div>
+    	<div class="tit2"><h2>[@Channel id='4']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
 		<div class="w96 mt10 mb5 b">
-        	[@DocList cId='13' tId='2' count='2' orderBy='2' callLevel='1']
+        	[@DocList cId='4' tId='2' count='2' orderBy='2' callLevel='1']
 			[#list list as a]
 			<div class="twlist3">
             	<a href="${a.url}" title="${a.title}" target="_blank"><img src="${base}${a.getPicStyle('0')!site.defImg}" alt="${a.title}"/></a>
@@ -338,7 +217,7 @@ function checkval(){
 			[/#list]
 			[/@DocList]
 		</div>
-        [@DocList cId='13' count='7' orderBy='2' callLevel='1']
+        [@DocList cId='4' count='7' orderBy='2' callLevel='1']
         <ul class="nlist w96">
         	<li class="bb2"></li>
 			[#list list as a]
@@ -348,10 +227,9 @@ function checkval(){
 		[/@DocList]
     </div>
 	<div class="mr">
-        <div class="bor">
-    		<div class="tit"><h2>健康</h2></div>
+    		<div class="tit2"><h2>[@Channel id='221']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
             <div class="cont">
-                [@DocList cId='14' count='11' orderBy='3' callLevel='1']
+                [@DocList cId='221' count='11' orderBy='3' callLevel='1']
 				[#if list?size gt 0]
 				[#assign a=list[0]]
 				<div class="twlist mt10 mb5 w92">
@@ -371,18 +249,16 @@ function checkval(){
 				[/#if]
 				[/@DocList]
             </div>
-        </div>
     </div>
 </section>
 <!--/main_3-->
-
 
 <!--main_4-->
 <section class="s b mt10">
 	<div class="ml">
     	<div class="bor1">
-    		<div class="tit1"><h2>[@Channel id='15']<a href="${bean.url}" target="_blank">[/@Channel]时尚</a></h2></div>
-			[@DocList cId='15' tId='2' count='2' orderBy='2' callLevel='1']
+    		<div class="tit1"><h2>[@Channel id='14']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
+			[@DocList cId='14' tId='2' count='2' orderBy='2' callLevel='1']
 			[#list list as a]
 			<div class="twlist2 mt10 mb5 w94">
 				<a href="${a.url}" title="${a.title}" target="_blank"><img src="${base}${a.getPicStyle('0')!site.defImg}" alt="${a.title}"/></a>
@@ -393,7 +269,7 @@ function checkval(){
 			</div>
 			[/#list]
 			[/@DocList]
-			[@DocList cId='15' count='7' orderBy='2' callLevel='1']
+			[@DocList cId='14' count='7' orderBy='2' callLevel='1']
 			<ul class="nlist2 w94 pb5">
 				[#list list as a]
 				[#if a_index gt 1]
@@ -405,7 +281,7 @@ function checkval(){
 		</div>
     </div>
 	<div class="mc">    	
-    	<div class="tit2"><h2>[@Channel id='20']<a href="${bean.url}" target="_blank">[/@Channel]旅游</a></h2></div>
+    	<div class="tit2"><h2>[@Channel id='20']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
 		<div class="w96 mt10 mb5 b">
         	[@DocList cId='20' tId='2' count='2' orderBy='2' callLevel='1']
 			[#list list as a]
@@ -427,10 +303,9 @@ function checkval(){
 		[/@DocList]
     </div>
 	<div class="mr">
-        <div class="bor">
-    		<div class="tit"><h2>[@Channel id='211']<a href="${bean.url}" target="_blank">[/@Channel]房产</a></h2></div>
+    		<div class="tit2"><h2>[@Channel id='15']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
             <div class="cont">
-                [@DocList cId='211' count='11' orderBy='2' callLevel='1']
+                [@DocList cId='15' count='11' orderBy='2' callLevel='1']
 				[#if list?size gt 0]
 				[#assign a=list[0]]
 				<div class="twlist mt10 mb5 w92">
@@ -450,17 +325,103 @@ function checkval(){
 				[/#if]
 				[/@DocList]
             </div>
-        </div>
     </div>
 </section>
 <!--/main_4-->
 
+
+<!--main_2-->
+<section class="s b mt10">
+	<div class="ml">
+		<div class="bor">
+            <div class="tit"><h2>视频快讯</h2></div>
+            <div class="cont">
+            [@DocList mId='4' count='10' orderBy='2' callLevel='1']
+            [#if list?size gt 0]
+            [#assign a=list[0]]
+            <div class="twlist w92 mt5 pb5">
+              <a href="${a.url}" title="${a.title}" target="_blank" class="video"><img src="${base}${a.getPicStyle('0')!}"/><i></i></a>
+              <div class="in_text">
+                <h2><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='20'/]</a></h2>
+                <p>[@StrLimit s=a.description l='14'/]<a href="${a.url}" target="_blank" class="blue">[详情]</a></p>
+              </div>
+            </div>
+            <ul class="nlist2 w92 pb5">
+            [#list list as a]
+            [#if a_index gt 0]
+                <li class="m4"><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='16'/]</a></li>
+            [/#if]
+            [/#list]
+            </ul>
+            [/#if]
+            [/@DocList]
+            </div>
+        </div>
+    </div>
+	<div class="mc">    
+		<div class="bor">	
+    	<div class="tit"><h2>热门图集</h2></div>
+			<div class="cont">
+            [@DocList mId='3' count='10' orderBy='2' callLevel='1']
+            [#if list?size gt 0]
+            [#assign a=list[0]]
+            <div class="twlist w92 mt5 pb5">
+              <a href="${a.url}" title="${a.title}" target="_blank"><img src="${base}${a.getPicStyle('0')!}"/><i></i></a>
+              <div class="in_text">
+                <h2><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='20'/]</a></h2>
+                <p>[@StrLimit s=a.description l='14'/]<a href="${a.url}" target="_blank" class="blue">[详情]</a></p>
+              </div>
+            </div>
+            <ul class="nlist2 w92 pb5">
+            [#list list as a]
+            [#if a_index gt 0]
+                <li class="m4"><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='16'/]</a></li>
+            [/#if]
+            [/#list]
+            </ul>
+            [/#if]
+            [/@DocList]
+            </div>
+		</div>
+    </div>
+	<div class="mr">
+        <div class="bor">
+    		<div class="tit"><h2>专题</h2></div>
+            <div class="cont">
+                [@DocList mId='5' count='15' orderBy='2' callLevel='1']
+				<ul class="nlist2 w92 pb5">
+					[#list list as a]
+					<li><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='16'/]</a></li>
+					[/#list]
+				</ul>
+				[/@DocList]
+            </div>
+        </div>
+    </div>
+</section>
+<!--/main_2-->
+
+		<!-- <div class="bor mt10">
+    		<div class="tit"><h2>精彩推荐</h2></div>
+            <div class="cont">
+            [@DocList count='4' recommend='1']
+            <ul class="nlist2 w92 pb5">
+            [#list list as a]
+                <li><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='16'/]</a></li>
+            [/#list]
+            </ul>
+            [/@DocList]
+            </div>
+        </div> -->
+
+
+
 <!--main_4-->
 <section class="s mt10 bor1 b">
-	<div class="tit1"><h2>精彩图集</h2></div>
+	<div class="tit1"><h2>[@Channel id='33']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
     <div class="cont">
       <div class="mt5 w98 b">
-      	[@DocList mId='3' count='7' orderBy='2']
+      	[@DocList cId='33' count='7' orderBy='2']
         [#if list?size gt 0]
         [#assign a=list[0]]
     	<div class="cl">
