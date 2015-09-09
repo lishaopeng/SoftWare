@@ -93,11 +93,14 @@ function checkval(){
 
 
 <!--main_1-->
+<br/>
+<br/>
+<br/>
 <section class="s mt5 b">
 	<div class="ml">
-	    <div class="tit1"><h2>[@Channel id='3']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
+	    <div class="tit1"><h2>[@Channel id='1']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
         <!--jdt-->
-		[@DocList tId='2' count='10' cId='3' recommend='1' callLevel=2]
+		[@DocList tId='2' count='10' cId='1' recommend='1' callLevel=2]
         <div class="focus-pic" id="focus-pic">
             <div data-scro="list" log-type="toppic">
                 <ul>
@@ -124,7 +127,7 @@ function checkval(){
         </div>
 		<script src="/${skin}/js/focus.js"></script>
 		[/@DocList]
-		[@DocList count='4' cId='3' callLevel='2']
+		[@DocList count='4' cId='1' callLevel='2']
 		<ul class="nlist w96">
          	<li class="bb2"></li>
          	[#list list as c]
@@ -134,9 +137,9 @@ function checkval(){
         [/@DocList]
 	</div>
 	<div class="mc">
-    	<div class="tit2"><h2>[@Channel id='1']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
+    	<div class="tit2"><h2>[@Channel id='2']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
 		<div class="tt w96">
-			[@DocList count='3' cId='1' callLevel='2']
+			[@DocList count='3' cId='2' callLevel='2']
 			[#if list?size gt 0]
         	[#assign a=list[0]]
 			<h2><a href="${a.url}" title="${a.title}" target="_blank">[@StrLimit s=a.title l='20'/]</a></h2>
@@ -148,7 +151,7 @@ function checkval(){
             [/#if]
 			[/@DocList]
 		</div>
-        [@DocList cId='1' count='13']
+        [@DocList cId='2' count='13']
         <ul class="nlist w96">
 			[#list list as a]
 			[#if a_index gt 2]
@@ -181,8 +184,8 @@ function checkval(){
 <section class="s b mt10">
 	<div class="ml">
     	<div class="bor1">
-    		<div class="tit1"><h2>[@Channel id='13']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
-			[@DocList cId='13' tId='2' count='2' orderBy='2' callLevel='1']
+    		<div class="tit1"><h2>[@Channel id='3']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
+			[@DocList cId='3' tId='2' count='2' orderBy='2' callLevel='1']
 			[#list list as a]
 			<div class="twlist2 mt10 mb5 w94">
 				<a href="${a.url}" title="${a.title}" target="_blank"><img src="${base}${a.getPicStyle('0')!site.defImg}" alt="${a.title}"/></a>
@@ -193,7 +196,7 @@ function checkval(){
 			</div>
 			[/#list]
 			[/@DocList]
-			[@DocList cId='13' count='7' orderBy='2' callLevel='1']
+			[@DocList cId='3' count='7' orderBy='2' callLevel='1']
 			<ul class="nlist2 w94 pb5">
 				[#list list as a]
 				[#if a_index gt 1]
@@ -227,9 +230,9 @@ function checkval(){
 		[/@DocList]
     </div>
 	<div class="mr">
-    		<div class="tit2"><h2>[@Channel id='221']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
+    		<div class="tit2"><h2>[@Channel id='211']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
             <div class="cont">
-                [@DocList cId='221' count='11' orderBy='3' callLevel='1']
+                [@DocList cId='211' count='11' orderBy='3' callLevel='1']
 				[#if list?size gt 0]
 				[#assign a=list[0]]
 				<div class="twlist mt10 mb5 w92">
@@ -257,8 +260,8 @@ function checkval(){
 <section class="s b mt10">
 	<div class="ml">
     	<div class="bor1">
-    		<div class="tit1"><h2>[@Channel id='14']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
-			[@DocList cId='14' tId='2' count='2' orderBy='2' callLevel='1']
+    		<div class="tit1"><h2>[@Channel id='13']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
+			[@DocList cId='13' tId='2' count='2' orderBy='2' callLevel='1']
 			[#list list as a]
 			<div class="twlist2 mt10 mb5 w94">
 				<a href="${a.url}" title="${a.title}" target="_blank"><img src="${base}${a.getPicStyle('0')!site.defImg}" alt="${a.title}"/></a>
@@ -269,7 +272,7 @@ function checkval(){
 			</div>
 			[/#list]
 			[/@DocList]
-			[@DocList cId='14' count='7' orderBy='2' callLevel='1']
+			[@DocList cId='13' count='7' orderBy='2' callLevel='1']
 			<ul class="nlist2 w94 pb5">
 				[#list list as a]
 				[#if a_index gt 1]
@@ -281,7 +284,7 @@ function checkval(){
 		</div>
     </div>
 	<div class="mc">    	
-    	<div class="tit2"><h2>[@Channel id='20']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
+    	<div class="tit2"><h2>[@Channel id='14']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
 		<div class="w96 mt10 mb5 b">
         	[@DocList cId='20' tId='2' count='2' orderBy='2' callLevel='1']
 			[#list list as a]
@@ -293,7 +296,7 @@ function checkval(){
 			[/#list]
 			[/@DocList]
 		</div>
-        [@DocList cId='20' count='7' orderBy='2' callLevel='1']
+        [@DocList cId='14' count='7' orderBy='2' callLevel='1']
         <ul class="nlist w96">
         	<li class="bb2"></li>
 			[#list list as a]
@@ -418,10 +421,10 @@ function checkval(){
 
 <!--main_4-->
 <section class="s mt10 bor1 b">
-	<div class="tit1"><h2>[@Channel id='33']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
+	<div class="tit1"><h2>[@Channel id='217']<a href="${bean.url}" target="_blank">[/@Channel]${bean.name}</a></h2></div>
     <div class="cont">
       <div class="mt5 w98 b">
-      	[@DocList cId='33' count='7' orderBy='2']
+      	[@DocList cId='217' count='7' orderBy='2']
         [#if list?size gt 0]
         [#assign a=list[0]]
     	<div class="cl">
